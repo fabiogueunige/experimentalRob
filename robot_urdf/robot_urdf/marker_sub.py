@@ -60,11 +60,12 @@ class MarkerClass_Subscriber (Node):
 
     def corners_callback(self, msg_corners):   
         self.center = msg_corners
-        self.get_logger().info('Center: %f %f %f' % (self.center.position.x, self.center.position.y, self.center.position.z))
+        
 
     def aruco_marker_callback(self, msg_marker):
         self.marker_id = msg_marker.marker_ids[-1]
         self.marker_pose = msg_marker.poses[-1]
+        self.get_logger().info('id: %d' % self.marker_id)
         self.robot_control ()
 
     def image_callback(self, msg_image):

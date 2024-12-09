@@ -29,7 +29,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'main = robot_urdf.main:main',
+            # 'main = robot_urdf.main:main',
+            'camera_rot = robot_urdf.camera_rot:main',
         ],
     },
 )

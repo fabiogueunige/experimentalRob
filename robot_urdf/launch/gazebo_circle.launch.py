@@ -15,7 +15,7 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
     test_robot_description_share = FindPackageShare(package='robot_urdf').find('robot_urdf')
     default_model_path = os.path.join(test_robot_description_share, 'urdf/robot4.xacro')
-    default_world_path = os.path.join(test_robot_description_share, 'worlds/marker_circle.world')
+    default_world_path = os.path.join(test_robot_description_share, 'worlds/marker_circle_def.world')
     rviz_config_path = os.path.join(test_robot_description_share, 'config/rviz.rviz')
 
     robot_state_publisher_node = Node(
@@ -55,8 +55,8 @@ def generate_launch_description():
     
     main_node = Node(
         package='robot_urdf',
-        executable='main',
-        name='main',
+        executable='camera_rot',
+        name='camera_rot',
         output='screen'
     )
 

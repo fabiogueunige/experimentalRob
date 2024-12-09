@@ -23,9 +23,9 @@ joint_01_controller:
   ros__parameters:
     joints:
       - arm_joint_01
-    interface_name: position
+    interface_name: velocity # position
     command_interfaces:
-      - position
+      - velcoity # position
     state_interfaces:
       - position
       - velocity

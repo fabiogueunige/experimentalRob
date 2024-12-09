@@ -82,11 +82,13 @@ class ArucoNode(rclpy.node.Node):
         # Set up publishers
         self.poses_pub = self.create_publisher(PoseArray, 'aruco_poses', 10)
         self.markers_pub = self.create_publisher(ArucoMarkers, 'aruco_markers', 10)
+        self.corners_pub = self.create_publisher(Pose, 'aruco_corners', 10)
         
         # Set up fields for camera parameters
         self.info_msg = None
         self.intrinsic_mat = None
         self.distortion = None
+        self.num_corners = 4
 
         self.aruco_dictionary = cv2.aruco.Dictionary_get(dictionary_id)
         self.aruco_parameters = cv2.aruco.DetectorParameters_create()
@@ -134,7 +136,13 @@ class ArucoNode(rclpy.node.Node):
                 rvecs, tvecs = cv2.aruco.estimatePoseSingleMarkers(corners,
                                                                    self.marker_size, self.intrinsic_mat,
                                                                    self.distortion)
-                  
+            pose_center = Pose()
+            pose_center.position.x = (corners[0][0][0][0] + corners[0][0][2][0] + corners[0][0][3][0] + corners[0][0][1][0]) / 4
+            pose_center.position.y = (corners[0][0][0][1] + corners[0][0][2][1] + corners[0][0][3][1] + corners[0][0][1][1]) / 4
+            # on the z-axis we have the radius
+            pose_center.position.z = np.sqrt((pose_center.position.x - corners[0][0][0][0]) ** 2 + (pose_center.position.y - corners[0][0][0][1]) ** 2)
+
+            
             
             for i, marker_id in enumerate(marker_ids):
                 pose = Pose()
@@ -156,6 +164,7 @@ class ArucoNode(rclpy.node.Node):
                 markers.marker_ids.append(marker_id[0])
 
             self.poses_pub.publish(pose_array)
+            self.corners_pub.publish(pose_center)
             self.markers_pub.publish(markers)
             
 
