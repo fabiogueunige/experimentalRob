@@ -1,10 +1,5 @@
 import rclpy
 from rclpy.node import Node
-from robot_urdf.marker_sub import MarkerClass_Subscriber
-from robot_urdf.cmd_pub import CmdPublisher
-from geometry_msgs.msg import Twist
-from ros2_aruco_interfaces.msg import ArucoMarkers
-from sensor_msgs.msg import CameraInfo
 from sensor_msgs.msg import Image
 
 class ImagePublisher(Node):
@@ -16,4 +11,15 @@ class ImagePublisher(Node):
         msg = Image()
         msg = img
         self.publisher_.publish(msg)
+
+def main():
+    rclpy.init()
+    node = ImagePublisher()
+    rclpy.spin(node)
+
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
 

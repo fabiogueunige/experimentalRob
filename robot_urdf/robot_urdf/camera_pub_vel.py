@@ -1,7 +1,5 @@
 import rclpy
 from rclpy.node import Node
-from robot_urdf.marker_sub import MarkerClass_Subscriber
-import numpy as np
 from std_msgs.msg import Float64MultiArray
 
 class CmdJointPublisher(Node):
@@ -9,9 +7,21 @@ class CmdJointPublisher(Node):
         super().__init__('joint_vel_publisher')
         self.publisher_ = self.create_publisher(Float64MultiArray, '/joint_01_controller/commands', 1)
 
-    def send_cmd(self, position):
+    def send_cmd(self, velocity):
         msg = Float64MultiArray()
         msg.layout.dim = []
         msg.layout.data_offset = 0
-        msg.data = [position]
+        msg.data = [velocity]
         self.publisher_.publish(msg)
+
+def main():
+    rclpy.init()
+    node = CmdJointPublisher()
+    rclpy.spin(node)
+
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

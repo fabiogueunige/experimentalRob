@@ -14,9 +14,12 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     test_robot_description_share = FindPackageShare(package='robot_urdf').find('robot_urdf')
-    default_model_path = os.path.join(test_robot_description_share, 'urdf/robot4.xacro')
-    default_world_path = os.path.join(test_robot_description_share, 'worlds/marker_circle_def.world')
+    default_model_path = os.path.join(test_robot_description_share, 'urdf/robot_camera.xacro')
+    default_world_path = os.path.join(test_robot_description_share, 'worlds/marker_circle.world')
     rviz_config_path = os.path.join(test_robot_description_share, 'config/rviz.rviz')
+
+    # define which to launch (from .sh)
+    execName = LaunchConfiguration('execName')
 
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
@@ -46,17 +49,12 @@ def generate_launch_description():
         package='ros2_aruco',
         executable='aruco_node',
         name='aruco_node',
-        # parameters=[{'marker_size': 0.0625},
-        #             {'aruco_357.dictionary_id': 'DICT_5X5_250'},
-        #             {'image_topic': '/camera/image_raw'},  
-        #             {'camera_info_topic': '/camera/camera_info'}]
-        # output='screen'
     )
     
     main_node = Node(
         package='robot_urdf',
-        executable='camera_rot',
-        name='camera_rot',
+        executable=execName, 
+        name=execName,
         output='screen'
     )
 
@@ -72,10 +70,11 @@ def generate_launch_description():
         robot_state_publisher_node,
         joint_state_publisher_node,
         spawn_entity,
+        arm_01_controller,
         aruco_node,
         main_node,
-        arm_01_controller,
         broad,
+                
         ExecuteProcess(
             cmd=['gazebo', '--verbose', default_world_path, '-s', 'libgazebo_ros_factory.so'],
             output='screen'),

@@ -1,5 +1,4 @@
 import rclpy
-from rclpy.node import Node
 from robot_urdf.marker_sub import MarkerClass_Subscriber
 from robot_urdf.camera_pub_vel import CmdJointPublisher
 from robot_urdf.image_pub import ImagePublisher
@@ -29,9 +28,6 @@ def main():
 
         marker.reorder()
         for mk in marker.detected_markers:
-            #if isinstance(mk['image'], Image):
-            #        marker.get_logger().info('Image received')
-                
             try: 
                 cv_image = bridge.imgmsg_to_cv2(mk['image'], desired_encoding='mono8')
             except CvBridgeError as e:
@@ -40,8 +36,6 @@ def main():
             center_x = int(mk['centers'].position.x)
             center_y = int(mk['centers'].position.y)
             radius = int(mk['centers'].position.z)
-            #center_x = int(mk['pose'].position.x)
-            #center_y = int(mk['pose'].position.y)
 
             cv2.circle(cv_image, (center_x, center_y), radius, (0, 255, 0), 2)
             

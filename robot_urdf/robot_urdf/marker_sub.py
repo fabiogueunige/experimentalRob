@@ -26,14 +26,6 @@ class MarkerClass_Subscriber (Node):
             qos_profile_sensor_data)
         self.subscription_image  # prevent unused variable warning
         self.current_img = None
-        
-        self.subscription_corners = self.create_subscription(
-            Pose,
-            'aruco_corners',
-            self.corners_callback,
-            10)
-        self.subscription_corners
-        self.center = None
 
         self.declare_parameter("aruco_dictionary_id", "DICT_ARUCO_ORIGINAL")
         dictionary_id_name = self.get_parameter(
@@ -58,14 +50,10 @@ class MarkerClass_Subscriber (Node):
         self.detected_markers = [] #list of all Aruco markers detected 
         self.end_recognition = False #flag to stop the robot when it returns to the starting marker
 
-    def corners_callback(self, msg_corners):   
-        self.center = msg_corners
-        
-
     def aruco_marker_callback(self, msg_marker):
         self.marker_id = msg_marker.marker_ids[-1]
         self.marker_pose = msg_marker.poses[-1]
-        self.get_logger().info('id: %d' % self.marker_id)
+        self.get_logger().info('Marker ID: %d' % self.marker_id)
         self.robot_control ()
 
     def image_callback(self, msg_image):
@@ -74,26 +62,24 @@ class MarkerClass_Subscriber (Node):
     def robot_control(self):
         if not self.marker_id:
             self.get_logger().info('No marker detected yet')
-            
         else:
             if self.marker_id not in [marker['id'] for marker in self.detected_markers]:
-                if self.center is not None:
-                    cv_image = self.bridge.imgmsg_to_cv2(self.current_img,
-                                             desired_encoding='mono8')
-                    corners, marker_ids, rejected = cv2.aruco.detectMarkers(cv_image,
-                                                                self.aruco_dictionary,
-                                                                parameters=self.aruco_parameters)
-                    pose_center = Pose()
-                    pose_center.position.x = (corners[0][0][0][0] + corners[0][0][2][0] + corners[0][0][3][0] + corners[0][0][1][0]) / 4
-                    pose_center.position.y = (corners[0][0][0][1] + corners[0][0][2][1] + corners[0][0][3][1] + corners[0][0][1][1]) / 4
-                    # on the z-axis we have the radius
-                    pose_center.position.z = np.sqrt((pose_center.position.x - corners[0][0][0][0]) ** 2 + (pose_center.position.y - corners[0][0][0][1]) ** 2)
-                    self.detected_markers.append({
-                        'id': self.marker_id,
-                        'pose': self.marker_pose,
-                        'image': self.current_img,
-                        'centers': pose_center
-                    })
+                cv_image = self.bridge.imgmsg_to_cv2(self.current_img,
+                                            desired_encoding='mono8')
+                corners, marker_ids, rejected = cv2.aruco.detectMarkers(cv_image,
+                                                            self.aruco_dictionary,
+                                                            parameters=self.aruco_parameters)
+                pose_center = Pose()
+                pose_center.position.x = (corners[0][0][0][0] + corners[0][0][2][0] + corners[0][0][3][0] + corners[0][0][1][0]) / 4
+                pose_center.position.y = (corners[0][0][0][1] + corners[0][0][2][1] + corners[0][0][3][1] + corners[0][0][1][1]) / 4
+                # on the z-axis we have the radius
+                pose_center.position.z = np.sqrt((pose_center.position.x - corners[0][0][0][0]) ** 2 + (pose_center.position.y - corners[0][0][0][1]) ** 2)
+                self.detected_markers.append({
+                    'id': self.marker_id,
+                    'pose': self.marker_pose,
+                    'image': self.current_img,
+                    'centers': pose_center
+                })
                 
                     
             else:
@@ -105,5 +91,14 @@ class MarkerClass_Subscriber (Node):
         # reorder the markers from the smaller id to the biggest one
         self.detected_markers.sort(key=lambda x: x['id'])
         
+def main():
+    rclpy.init()
+    node = MarkerClass_Subscriber()
+    rclpy.spin(node)
+   
+    node.destroy_node()
+    rclpy.shutdown()
 
+if __name__ == '__main__':
+    main()
         
