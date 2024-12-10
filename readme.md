@@ -58,51 +58,12 @@ after for launch it run on terminal
 ros2 launch robot_urdf gazebo_circle.launch.py
 ```
 
+# Algorithm
+The goal of our algorithm is to make the robot turning, finding all the markers inside the arena, after reorder the finded marker and show a photo with all the finded marker reordered by their ids. And also put a circle inside a finded markers.
+
+# Problems
+This cose is developes using ros2 version humble, so there are sompe problem running the code with foxy, and there are some prblmen trying to executee the code inside docker.
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-Ora tutto insieme!!!
-
-Lancio gestito da file sh
-
-quindi fare:
-dentro cartella src/
-git clone...
-
-Se presente rimuovere aruco pkg (prima del clone)
-
-Dopo clone
-
-chmod +x launch.sh
-
-cd ..
-
-colcon build 
-
-cd src
-
-./launch.sh
-
-Spiegare che essendo stato sviluppato con humble, con docker non riesce a funzionare
-Per favore commentate il codice e scrivete che il nostro robot fa solo un giro
-
-Per voi cambiamenti fatti:
-Miglioramento di piccole parti di codice
-xacro messo quello che avevo fatto che funzionava 
-eliminati file non fatti da noi per focalizzare nostro lavoro
-Tutto il resto a parte qualche nome è rimasto lo stesso (non togliere materials)
-Il robot è una bomba grandi ragazzi!!!!
