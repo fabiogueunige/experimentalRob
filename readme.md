@@ -53,12 +53,6 @@ inside this folder there is the executable launch.sh,
 ```
 and follow the code inside for choose wich node run. there is the option: or move a camera or move a chassis for find the aruco markers
 
-
-after for launch it run on terminal 
-``` bash
-ros2 launch robot_urdf gazebo_circle.launch.py
-```
-
 # Algorithm
 The goal of our algorithm is to make the robot turning, finding all the markers inside the arena, reorder the finded marker through their ids, put a circle arount the markers and show a photo with all the finded marker reordered.
 
