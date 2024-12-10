@@ -1,3 +1,5 @@
+Project of Andrea Chiappe, Alberto Di Donna, Fabio Guelfi
+
 ## Prequisites needed
 
 ``` bash
