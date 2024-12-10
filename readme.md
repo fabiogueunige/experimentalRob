@@ -50,7 +50,7 @@ inside this folder there is the executable launch.sh,
 ```bash
 ./launch.sh
 ```
-and follow the code inside for choose wich node run, or move the chassis or move the camera for finde the aruco marker
+and follow the code inside for choose wich node run. there is the option: or move a camera or move a chassis for find the aruco markers
 
 
 after for launch it run on terminal 
@@ -59,10 +59,10 @@ ros2 launch robot_urdf gazebo_circle.launch.py
 ```
 
 # Algorithm
-The goal of our algorithm is to make the robot turning, finding all the markers inside the arena, after reorder the finded marker and show a photo with all the finded marker reordered by their ids. And also put a circle inside a finded markers.
+The goal of our algorithm is to make the robot turning, finding all the markers inside the arena, reorder the finded marker through their ids, put a circle arount the markers and show a photo with all the finded marker reordered.
 
 # Problems
-This cose is developes using ros2 version humble, so there are sompe problem running the code with foxy, and there are some prblmen trying to executee the code inside docker.
+This code is developed using ros2 version humble, so there are some problems running the code with foxy, and there are some prblmens trying to executee the code inside docker.
 
 
 
