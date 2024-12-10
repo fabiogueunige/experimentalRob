@@ -38,7 +38,9 @@ chmod +x launch.sh
 
 # Running 
 
-then build the ros2 folder, inside the ros worksapce run
+then build the ros2 folder,
+move inside the ros2 workspace 
+run
 ```bash
 colcon build
 ```
