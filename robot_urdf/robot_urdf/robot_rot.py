@@ -1,3 +1,6 @@
+'''
+this script will rotate the robot until it detects a marker
+'''
 import rclpy
 from robot_urdf.marker_sub import MarkerClass_Subscriber
 from robot_urdf.cmd_pub import CmdPublisher
@@ -7,10 +10,10 @@ from cv_bridge import CvBridge, CvBridgeError
 
 def main():
     rclpy.init()
-    vel_pub = CmdPublisher()
-    marker = MarkerClass_Subscriber()
     linear = 0.0
     angular = 0.5 #0.5
+    vel_pub = CmdPublisher()
+    marker = MarkerClass_Subscriber()
     bridge = CvBridge()
     img_pub = ImagePublisher()
 

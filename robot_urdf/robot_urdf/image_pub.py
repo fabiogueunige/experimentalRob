@@ -1,3 +1,6 @@
+'''
+this script publishes an image to the topic /camera/img
+'''
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image

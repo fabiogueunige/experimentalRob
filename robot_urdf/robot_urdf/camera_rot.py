@@ -1,3 +1,6 @@
+'''
+this script is used to control the robot to rotate until it detects the marker
+'''
 import rclpy
 from robot_urdf.marker_sub import MarkerClass_Subscriber
 from robot_urdf.camera_pub_vel import CmdJointPublisher

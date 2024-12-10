@@ -1,3 +1,7 @@
+'''
+This script is used to publish velocity commands to the robot.
+The velocity commands are published to the topic 'cmd_vel' in the form of Twist messages.
+'''
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist

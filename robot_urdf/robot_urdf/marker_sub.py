@@ -1,3 +1,9 @@
+'''
+this script subscribes to the ArucoMarkers topic : 'aruco_markers'
+this script subscribes to the camera image topic : 'camera/image_raw' 
+It detects the Aruco markers in the image and stores the detected markers in a list. 
+When the robot detects the starting marker again, it stops the robot.
+'''
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Pose, PoseArray

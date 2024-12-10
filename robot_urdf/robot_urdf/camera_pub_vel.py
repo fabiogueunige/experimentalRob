@@ -1,3 +1,9 @@
+'''
+- this script is used to publish the velocity command to the joint controller
+- the velocity command is published to the topic '/joint_01_controller/commands'
+- the velocity command is published as a Float64MultiArray message
+- the velocity command is published as a single element array
+'''
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray
