@@ -29,7 +29,7 @@ Inside the ros 2 workspace clone this two package
 ```bash
 git clone https://github.com/fabiogueunige/experimentalRob.git
 ```
-before cloning, if is present remove the folder aruco because the github foledr contain it
+before cloning, if is present remove the folder aruco because the github folder contain it
 
 Our launch is organized by the file launch.sh. So after cloning run this command for make the file executable
 ```bash
@@ -39,8 +39,7 @@ chmod +x launch.sh
 # Running 
 
 then build the ros2 folder,
-move inside the ros2 workspace 
-run
+move inside the ros2 workspace and run
 ```bash
 colcon build
 ```
@@ -64,7 +63,7 @@ ros2 launch robot_urdf gazebo_circle.launch.py
 The goal of our algorithm is to make the robot turning, finding all the markers inside the arena, reorder the finded marker through their ids, put a circle arount the markers and show a photo with all the finded marker reordered.
 
 # Problems
-This code is developed using ros2 version humble, so there are some problems running the code with foxy, and there are some prblmens trying to executee the code inside docker.
+This code is developed using ros2 version humble, so there are some problems running the code with foxy, and there are some problems trying to execute the code inside docker.
 
 
 
