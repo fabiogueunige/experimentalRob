@@ -1,4 +1,5 @@
 Project of Andrea Chiappe, Alberto Di Donna, Fabio Guelfi
+This project is all developed using ros2 distro hmble.
 
 ## Prequisites needed
 
@@ -13,15 +14,15 @@ sudo apt-get update
 ```
 
 ```bash
-sudo apt-get install ros-foxy-control*
-sudo apt-get install ros-foxy-ros-control*
-sudo apt-get install ros-foxy-gazebo*
+sudo apt-get install ros-humble-control*
+sudo apt-get install ros-humble-ros-control*
+sudo apt-get install ros-humble-gazebo*
 ```
 
 ``` bash
-apt install ros-foxy-gazebo-ros-pkgs
-apt install ros-foxy-joint-state-publisher ros-foxy-joint-state-publisher-gui
-apt install ros-foxy-xacro
+sudo apt install ros-humble-gazebo-ros-pkgs
+sudo apt install ros-humble-joint-state-publisher ros-humle-joint-state-publisher-gui
+sudo apt install ros-humble-xacro
 ```
 
 # Installation 
