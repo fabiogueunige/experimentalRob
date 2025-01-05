@@ -1,6 +1,12 @@
 Project of Andrea Chiappe, Alberto Di Donna, Fabio Guelfi
 This project is all developed using ros2 distro hmble.
 
+## Problems on running the package!!
+------------------------------------
+Due to the git configuration this may have problems while building.
+So, if like that, go and install this repository
+!(assignment 1 with better organization)[https://github.com/fabiogueunige/robot_urdf]
+
 ## Prequisites needed
 
 ``` bash
